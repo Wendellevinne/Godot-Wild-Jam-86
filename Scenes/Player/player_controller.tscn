@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddw0f1p31pmvy"]
+
+[ext_resource type="Script" uid="uid://cvwypn1a85260" path="res://Scripts/Player/player_script.gd" id="1_0bb2n"]
+[ext_resource type="Texture2D" uid="uid://cl88teyy86ee6" path="res://Assets/Player.png" id="2_duskh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jcea2"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l3cwt"]
+size = Vector2(64, 64)
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_mask = 7
+script = ExtResource("1_0bb2n")
+
+[node name="PlayerTexture" type="Sprite2D" parent="."]
+texture = ExtResource("2_duskh")
+
+[node name="PlayerCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jcea2")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(50, 0)
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("RectangleShape2D_l3cwt")
+
+[connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_area_entered"]

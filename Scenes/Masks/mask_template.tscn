@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dn6pcol2og2ip"]
+
+[ext_resource type="Script" uid="uid://cgqqnsje61wfe" path="res://Scripts/Interactable/mask_interactable.gd" id="1_7pkye"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s507g"]
+size = Vector2(16, 16)
+
+[node name="MaskTemplate" type="Area2D"]
+script = ExtResource("1_7pkye")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_s507g")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

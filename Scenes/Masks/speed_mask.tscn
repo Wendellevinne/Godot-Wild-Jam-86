@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bglcokq2ps4gx"]
+
+[ext_resource type="PackedScene" uid="uid://dn6pcol2og2ip" path="res://Scenes/Masks/mask_template.tscn" id="1_xhpkv"]
+[ext_resource type="Texture2D" uid="uid://dpogotx64rps0" path="res://Assets/Mask01.png" id="2_ui1xt"]
+
+[node name="SpeedMask" groups=["SpeedMask"] instance=ExtResource("1_xhpkv")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_ui1xt")

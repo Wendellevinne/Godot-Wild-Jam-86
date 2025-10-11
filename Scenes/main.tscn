@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6oi6xfbpvh50"]
+
+[ext_resource type="PackedScene" uid="uid://ddw0f1p31pmvy" path="res://Scenes/Player/player_controller.tscn" id="1_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://comv0pcgjg8wn" path="res://Scenes/Levels/prototype_level.tscn" id="2_8gbba"]
+[ext_resource type="PackedScene" uid="uid://bglcokq2ps4gx" path="res://Scenes/Masks/speed_mask.tscn" id="3_8gbba"]
+[ext_resource type="PackedScene" uid="uid://polxtka2qjxp" path="res://Scenes/Masks/jump_mask.tscn" id="4_jjvhh"]
+
+[node name="main" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_bo1nx")]
+position = Vector2(-256, -240)
+
+[node name="prototype_level" parent="." instance=ExtResource("2_8gbba")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1, 0)
+
+[node name="SpeedMask" parent="." instance=ExtResource("3_8gbba")]
+position = Vector2(100, -162)
+
+[node name="JumpMask" parent="." instance=ExtResource("4_jjvhh")]
+position = Vector2(330, -79)

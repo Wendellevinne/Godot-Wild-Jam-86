@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://polxtka2qjxp"]
+
+[ext_resource type="PackedScene" uid="uid://dn6pcol2og2ip" path="res://Scenes/Masks/mask_template.tscn" id="1_tj7sb"]
+[ext_resource type="Texture2D" uid="uid://ds4y3jhaqcl7u" path="res://Assets/Mask02.png" id="2_nhkgb"]
+
+[node name="JumpMask" groups=["JumpMask"] instance=ExtResource("1_tj7sb")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_nhkgb")
