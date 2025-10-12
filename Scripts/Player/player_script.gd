@@ -1,24 +1,58 @@
 class_name Player extends CharacterBody2D
 
+# Variables related with the character movement
+
+# Ground speed
 var move_speed: int = 400
+
+# Air Dash Speed
+var air_dash_speed: int = 1000
+
+# Deceleration rate of the air dash 
+var air_dash_slowdown_rate = 100
+
+# Jump height
 var jump_velocity: int = -500
 
-var can_double_jump: bool = false
+# Checks if the player can air dash
 var can_air_dash: bool = false
 
+# Checks if the player is in the middle of a air dash
+var is_on_air_dash: bool = false
+
+# Saves the dash direction
+var dash_direction: float = 0
+
+# Calls all the functions regarding the movement of the character
 func _physics_process(delta: float) -> void:
 	vertical_movement(delta)
-	horizontal_movement()
+	horizontal_movement(delta)
 	move_and_slide()
 
-func horizontal_movement() -> void:
+# Handles horizontal movement.
+func horizontal_movement(delta: float) -> void:
+	
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("move_left", "move_right")
+	
+	# Check if direction is different than 0. If so, move the character that way (1 for right
+	# -1 for left). If direction is equal to 0, the character doesn't move horizontally
 	if direction:
 		velocity.x = direction * move_speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, move_speed)
+	
+	# Handle air dash. Activated when Left Shift or Space are pressed
+	if Input.is_action_just_pressed("air_dash") and can_air_dash and not is_on_floor():
+		dash_direction = direction
+		is_on_air_dash = true
+		can_air_dash = false
+	
+	# Executes the air dash movement, if the character is during one
+	if is_on_air_dash:
+		velocity.x = dash_direction * air_dash_speed - (air_dash_slowdown_rate * delta)
 
+#Handles vertical movement
 func vertical_movement(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
@@ -27,10 +61,21 @@ func vertical_movement(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
+	
+	# When the player touches the ground, reset all their movement options
+	if is_on_floor():
+		reset_movement_options()
 
+# Resets movement options of the player (E.G. double jump, air dash...)
+func reset_movement_options() -> void:
+	is_on_air_dash = false
+	can_air_dash = true
+
+# Enables air dash. Disables all other movement options when enabled
+func enable_air_dash() -> void:
+	can_air_dash = true
+
+# Changes the move_speed and jump height of the character
 func change_character_movement(new_move_speed: int, new_jump_velocity: int) -> void:
 	move_speed = new_move_speed
 	jump_velocity = new_jump_velocity
-
-func _on_detection_area_area_entered(area: Area2D) -> void:
-	collision_manager.process_collision(self, area)

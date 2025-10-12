@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8bk2urqwbti3"]
+
+[ext_resource type="PackedScene" uid="uid://dn6pcol2og2ip" path="res://Scenes/Masks/mask_template.tscn" id="1_06ehi"]
+[ext_resource type="Texture2D" uid="uid://b3pb1v4ggd237" path="res://Assets/Mask03.png" id="2_fulvj"]
+
+[node name="AirDashMask" groups=["AirDashMask"] instance=ExtResource("1_06ehi")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_fulvj")
