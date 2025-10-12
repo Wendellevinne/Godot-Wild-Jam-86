@@ -17,6 +17,7 @@ script = ExtResource("1_0bb2n")
 texture = ExtResource("2_duskh")
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
+scale = Vector2(0.99, 0.99)
 shape = SubResource("RectangleShape2D_jcea2")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
@@ -26,4 +27,5 @@ target_position = Vector2(50, 0)
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+scale = Vector2(0.99, 0.99)
 shape = SubResource("RectangleShape2D_l3cwt")
