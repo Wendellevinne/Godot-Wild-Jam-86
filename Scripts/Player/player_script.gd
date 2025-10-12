@@ -14,6 +14,9 @@ var air_dash_slowdown_rate = 100
 # Jump height
 var jump_velocity: int = -500
 
+# Checks whether the character has the air-dash mask equipped
+var air_dash_mask: bool = false
+
 # Checks if the player can air dash
 var can_air_dash: bool = false
 
@@ -43,7 +46,7 @@ func horizontal_movement(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, move_speed)
 	
 	# Handle air dash. Activated when Left Shift or Space are pressed
-	if Input.is_action_just_pressed("air_dash") and can_air_dash and not is_on_floor():
+	if Input.is_action_just_pressed("air_dash") and air_dash_mask and not is_on_floor():
 		dash_direction = direction
 		is_on_air_dash = true
 		can_air_dash = false
@@ -73,7 +76,7 @@ func reset_movement_options() -> void:
 
 # Enables air dash. Disables all other movement options when enabled
 func enable_air_dash() -> void:
-	can_air_dash = true
+	air_dash_mask = true
 
 # Changes the move_speed and jump height of the character
 func change_character_movement(new_move_speed: int, new_jump_velocity: int) -> void:
