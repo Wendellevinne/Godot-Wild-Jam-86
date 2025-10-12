@@ -8,5 +8,5 @@ func process_collision(body: Player, collided_object: Area2D) -> void:
 		body.change_character_movement(600, -250)
 	elif collided_object.is_in_group("JumpMask"):
 		body.change_character_movement(300, -800)
-	elif  collided_object.is_in_group("AirDashMask"):
+	elif collided_object.is_in_group("AirDashMask"):
 		body.enable_air_dash()

@@ -3,16 +3,22 @@ class_name Player extends CharacterBody2D
 # Variables related with the character movement
 
 # Ground speed
-var move_speed: int = 400
+@export var move_speed: float = 400
 
 # Air Dash Speed
-var air_dash_speed: int = 1000
+@export var air_dash_speed: float = 1000
 
 # Deceleration rate of the air dash 
-var air_dash_slowdown_rate = 100
+@export var air_dash_slowdown_rate: float = 100
 
 # Jump height
-var jump_velocity: int = -500
+@export var jump_velocity: float = -500
+
+# Specifies for how many frames jump press is valid
+@export var coyote_frames: int = 6
+
+# Keeps track of how many frames passed from the last moment the player was on ground
+var frames_since_grounded: int = 0
 
 # Checks whether the character has the air-dash mask equipped
 var air_dash_mask: bool = false
@@ -23,8 +29,12 @@ var can_air_dash: bool = false
 # Checks if the player is in the middle of a air dash
 var is_on_air_dash: bool = false
 
+# Saves variable for coyote time
+var was_jump_pressed: bool = false
+
 # Saves the dash direction
 var dash_direction: float = 0
+
 
 # Calls all the functions regarding the movement of the character
 func _physics_process(delta: float) -> void:
@@ -45,8 +55,12 @@ func horizontal_movement(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, move_speed)
 	
-	# Handle air dash. Activated when Left Shift or Space are pressed
-	if Input.is_action_just_pressed("air_dash") and air_dash_mask and not is_on_floor():
+	# Stop dash on direction change
+	if direction != dash_direction:
+		is_on_air_dash = false
+	
+	# Handle air dash. Activated when Left Shift or Space and can_air_dash is true
+	if Input.is_action_just_pressed("air_dash") and can_air_dash and air_dash_mask and not is_on_floor():
 		dash_direction = direction
 		is_on_air_dash = true
 		can_air_dash = false
@@ -60,10 +74,17 @@ func vertical_movement(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
+	
+	if is_on_floor():
+		frames_since_grounded = 0
+	else:
+		frames_since_grounded += 1
+	
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump_velocity
+	if Input.is_action_just_pressed("jump"):
+		if is_on_floor() or frames_since_grounded <= coyote_frames:
+			velocity.y = jump_velocity
+			frames_since_grounded += 1
 	
 	# When the player touches the ground, reset all their movement options
 	if is_on_floor():
