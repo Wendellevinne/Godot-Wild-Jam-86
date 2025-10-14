@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://q4pdscvqds3b" path="res://Scripts/UI/timer.gd" id="1_dytps"]
 [ext_resource type="FontFile" uid="uid://vuvad7koos8g" path="res://Assets/monogram.ttf" id="1_kx66v"]
 
-[node name="Control" type="Control" node_paths=PackedStringArray("timer_label")]
+[node name="Control" type="Control" node_paths=PackedStringArray("timer", "timer_label")]
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -14,6 +14,7 @@ offset_right = -10.0
 offset_bottom = 10.000061
 grow_horizontal = 0
 script = ExtResource("1_dytps")
+timer = NodePath("Timer")
 timer_label = NodePath("AspectRatioContainer/Label")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
@@ -35,3 +36,5 @@ theme_override_font_sizes/font_size = 80
 text = "00:00:00"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]

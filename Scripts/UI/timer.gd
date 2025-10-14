@@ -1,7 +1,7 @@
 extends Control
 
 @onready var current_level: Map = get_tree().get_first_node_in_group("Levels")
-@onready var timer: Timer = Timer.new()
+@export var timer: Timer
 @export var timer_label: Label
 
 
@@ -17,10 +17,11 @@ func initialize_timer() -> void:
 	timer.set_wait_time(level_time_limit)
 
 func start_timer() -> void:
-	timer.autostart = true
+	timer.start()
 	
 func stop_timer() -> void:
 	timer.stop()
 	
 func _transfer_timer_value_to_label() -> void:
-	timer_label.text = str(timer.get_time_left())
+	var time_label_text = "{timer}"
+	timer_label.text = time_label_text.format({"timer":"%0.2f" % str(timer.get_time_left())})
