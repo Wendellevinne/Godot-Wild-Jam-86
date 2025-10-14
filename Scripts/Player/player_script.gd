@@ -3,13 +3,13 @@ class_name Player extends CharacterBody2D
 # Variables related with the character movement
 
 # Ground speed
-@export var move_speed: float = 400
+@export var move_speed: float = 1000
 
 # Air Dash Speed
-@export var air_dash_speed: float = 1000
+@export var air_dash_speed: float = 1500
 
 # Deceleration rate of the air dash 
-@export var air_dash_slowdown_rate: float = 100
+@export var air_dash_slowdown_rate: float = 200
 
 # Jump height
 @export var jump_velocity: float = -500
@@ -21,7 +21,7 @@ class_name Player extends CharacterBody2D
 var frames_since_grounded: int = 0
 
 # Checks whether the character has the air-dash mask equipped
-var air_dash_mask: bool = false
+var air_dash_mask: bool = true
 
 # Checks if the player can air dash
 var can_air_dash: bool = false
