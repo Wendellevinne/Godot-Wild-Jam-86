@@ -24,4 +24,4 @@ func stop_timer() -> void:
 	
 func _transfer_timer_value_to_label() -> void:
 	var time_label_text = "{timer}"
-	timer_label.text = time_label_text.format({"timer":"%0.2f" % str(timer.get_time_left())})
+	timer_label.text = time_label_text.format({"timer":"%0.2f" % timer.get_time_left()})

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://nwdde36flu14"]
+
+[ext_resource type="PackedScene" uid="uid://comv0pcgjg8wn" path="res://Scenes/Levels/prototype_level.tscn" id="1_5a1yd"]
+
+[node name="LevelTemplate" instance=ExtResource("1_5a1yd")]
+tile_map_data = PackedByteArray()
