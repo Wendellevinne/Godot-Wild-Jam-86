@@ -17,11 +17,13 @@ class_name Player extends CharacterBody2D
 # Specifies for how many frames jump press is valid
 @export var coyote_frames: int = 6
 
+@export var air_dash_timer: Timer
+
 # Keeps track of how many frames passed from the last moment the player was on ground
 var frames_since_grounded: int = 0
 
 # Checks whether the character has the air-dash mask equipped
-var air_dash_mask: bool = true
+var air_dash_mask: bool = false
 
 # Checks if the player can air dash
 var can_air_dash: bool = false
@@ -64,6 +66,7 @@ func horizontal_movement(delta: float) -> void:
 		dash_direction = direction
 		is_on_air_dash = true
 		can_air_dash = false
+		air_dash_timer.start(1)
 	
 	# Executes the air dash movement, if the character is during one
 	if is_on_air_dash:
@@ -72,9 +75,9 @@ func horizontal_movement(delta: float) -> void:
 #Handles vertical movement
 func vertical_movement(delta: float) -> void:
 	# Add the gravity.
-	if not is_on_floor():
+	if not is_on_floor() and not is_on_air_dash:
 		velocity += get_gravity() * delta
-	
+		
 	if is_on_floor():
 		frames_since_grounded = 0
 	else:
@@ -104,3 +107,6 @@ func change_move_speed(new_move_speed: int) -> void:
 
 func change_jump_velocity(new_jump_velocity: int) -> void:
 	jump_velocity = new_jump_velocity
+
+func _on_air_dash_timer_timeout() -> void:
+	is_on_air_dash = false
