@@ -99,7 +99,8 @@ func reset_movement_options() -> void:
 func enable_air_dash() -> void:
 	air_dash_mask = true
 
-# Changes the move_speed and jump height of the character
-func change_character_movement(new_move_speed: int, new_jump_velocity: int) -> void:
+func change_move_speed(new_move_speed: int) -> void:
 	move_speed = new_move_speed
+
+func change_jump_velocity(new_jump_velocity: int) -> void:
 	jump_velocity = new_jump_velocity

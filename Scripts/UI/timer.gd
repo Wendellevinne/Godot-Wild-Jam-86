@@ -1,4 +1,4 @@
-extends Control
+class_name LevelTimer extends Control
 
 @onready var current_level: Map = get_tree().get_first_node_in_group("Levels")
 @export var timer: Timer

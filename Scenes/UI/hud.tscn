@@ -4,4 +4,4 @@
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
-[node name="Control" parent="." instance=ExtResource("1_sprlj")]
+[node name="Timer" parent="." instance=ExtResource("1_sprlj")]

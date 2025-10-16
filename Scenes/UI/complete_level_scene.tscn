@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://e8d4frllpg2t"]
+
+[ext_resource type="PackedScene" uid="uid://b72j0mnmxb58k" path="res://Scenes/UI/end_screen_template.tscn" id="1_6wrm6"]
+
+[node name="Control" instance=ExtResource("1_6wrm6")]
+
+[node name="Label" parent="VBoxContainer/TextBox" index="0"]
+text = "Take off your mask, you're safe
+...
+For now"

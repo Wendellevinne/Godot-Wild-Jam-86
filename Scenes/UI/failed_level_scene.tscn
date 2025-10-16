@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpsao8ojjctfq"]
+
+[ext_resource type="PackedScene" uid="uid://b72j0mnmxb58k" path="res://Scenes/UI/end_screen_template.tscn" id="1_pdoo7"]
+
+[node name="Control" instance=ExtResource("1_pdoo7")]
+
+[node name="Label" parent="VBoxContainer/TextBox" index="0"]
+text = "Your mask has shattered, revealing your true nature to those you wished to hide from..."
+
+[node name="Button" parent="VBoxContainer/ButtonBox/HBoxContainer/NextButton" index="0"]
+disabled = true
