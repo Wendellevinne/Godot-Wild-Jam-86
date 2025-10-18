@@ -11,3 +11,6 @@ position = Vector2(-960, 408)
 
 [node name="AirDashMask" parent="." index="1" instance=ExtResource("2_r0ok7")]
 position = Vector2(386, 311)
+
+[node name="Player" parent="." index="2"]
+position = Vector2(-81, -150)

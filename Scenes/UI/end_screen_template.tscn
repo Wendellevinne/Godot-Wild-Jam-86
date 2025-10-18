@@ -1,14 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://b72j0mnmxb58k"]
+[gd_scene load_steps=3 format=3 uid="uid://b72j0mnmxb58k"]
 
+[ext_resource type="Script" uid="uid://bthoenrvh6d2s" path="res://Scripts/UI/end_screen.gd" id="1_eod5t"]
 [ext_resource type="FontFile" uid="uid://vuvad7koos8g" path="res://Assets/monogram.ttf" id="1_hwcsp"]
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" node_paths=PackedStringArray("exit_button", "retry_button", "next_level_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_eod5t")
+exit_button = NodePath("VBoxContainer/ButtonBox/HBoxContainer/ExitButtonControl/ExitButton")
+retry_button = NodePath("VBoxContainer/ButtonBox/HBoxContainer/ReplayButtonControl/ReplayButton")
+next_level_button = NodePath("VBoxContainer/ButtonBox/HBoxContainer/NextButtonControl/NextButton")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -69,11 +74,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 
-[node name="ExitButton" type="Control" parent="VBoxContainer/ButtonBox/HBoxContainer"]
+[node name="ExitButtonControl" type="Control" parent="VBoxContainer/ButtonBox/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="VBoxContainer/ButtonBox/HBoxContainer/ExitButton"]
+[node name="ExitButton" type="Button" parent="VBoxContainer/ButtonBox/HBoxContainer/ExitButtonControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -87,11 +92,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 
-[node name="ReplayButton" type="Control" parent="VBoxContainer/ButtonBox/HBoxContainer"]
+[node name="ReplayButtonControl" type="Control" parent="VBoxContainer/ButtonBox/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button2" type="Button" parent="VBoxContainer/ButtonBox/HBoxContainer/ReplayButton"]
+[node name="ReplayButton" type="Button" parent="VBoxContainer/ButtonBox/HBoxContainer/ReplayButtonControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -105,11 +110,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 
-[node name="NextButton" type="Control" parent="VBoxContainer/ButtonBox/HBoxContainer"]
+[node name="NextButtonControl" type="Control" parent="VBoxContainer/ButtonBox/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="VBoxContainer/ButtonBox/HBoxContainer/NextButton"]
+[node name="NextButton" type="Button" parent="VBoxContainer/ButtonBox/HBoxContainer/NextButtonControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -122,3 +127,7 @@ text = "Next Level"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
+
+[connection signal="pressed" from="VBoxContainer/ButtonBox/HBoxContainer/ExitButtonControl/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonBox/HBoxContainer/ReplayButtonControl/ReplayButton" to="." method="_on_replay_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonBox/HBoxContainer/NextButtonControl/NextButton" to="." method="_on_next_button_pressed"]

@@ -11,3 +11,6 @@ position = Vector2(422, 326)
 
 [node name="JumpMask" parent="." index="1" instance=ExtResource("2_i5tww")]
 position = Vector2(266, -427)
+
+[node name="Player" parent="." index="2"]
+position = Vector2(-113, -37)
