@@ -6,4 +6,4 @@
 [node name="main" type="Node2D" groups=["Main"]]
 script = ExtResource("1_21xkr")
 
-[node name="CanvasLayer" parent="." groups=["HUD"] instance=ExtResource("6_21xkr")]
+[node name="HUD" parent="." groups=["HUD"] instance=ExtResource("6_21xkr")]

@@ -17,6 +17,8 @@ class_name Player extends CharacterBody2D
 # Specifies for how many frames jump press is valid
 @export var coyote_frames: int = 6
 
+# Amount of time the character is considered in the air dash state. Once the time ends, the character
+# returns to its "neutral" state
 @export var air_dash_timer: Timer
 
 # Keeps track of how many frames passed from the last moment the player was on ground
@@ -38,13 +40,13 @@ var was_jump_pressed: bool = false
 var dash_direction: float = 0
 
 
-# Calls all the functions regarding the movement of the character
+# Call all the functions regarding the movement of the character
 func _physics_process(delta: float) -> void:
 	vertical_movement(delta)
 	horizontal_movement(delta)
 	move_and_slide()
 
-# Handles horizontal movement.
+# Handle horizontal movement.
 func horizontal_movement(delta: float) -> void:
 	
 	# Get the input direction and handle the movement/deceleration.
@@ -61,7 +63,8 @@ func horizontal_movement(delta: float) -> void:
 	if direction != dash_direction:
 		is_on_air_dash = false
 	
-	# Handle air dash. Activated when Left Shift or Space and can_air_dash is true
+	# Handle air dash. Activated when Left Shift or Space is pressed, and can_air_dash is true,
+	# and the player has the air dash mask, and it is not on the floor
 	if Input.is_action_just_pressed("air_dash") and can_air_dash and air_dash_mask and not is_on_floor():
 		dash_direction = direction
 		is_on_air_dash = true
@@ -72,9 +75,9 @@ func horizontal_movement(delta: float) -> void:
 	if is_on_air_dash:
 		velocity.x = dash_direction * air_dash_speed - (air_dash_slowdown_rate * delta)
 
-#Handles vertical movement
+#Handle vertical movement
 func vertical_movement(delta: float) -> void:
-	# Add the gravity.
+	# Add the gravity. If the player is on a air dash, it doesn't lose height
 	if not is_on_floor() and not is_on_air_dash:
 		velocity += get_gravity() * delta
 		
@@ -93,15 +96,16 @@ func vertical_movement(delta: float) -> void:
 	if is_on_floor():
 		reset_movement_options()
 
-# Resets movement options of the player (E.G. double jump, air dash...)
+# Reset movement options of the player (E.G. double jump, air dash...)
 func reset_movement_options() -> void:
 	is_on_air_dash = false
 	can_air_dash = true
 
-# Enables air dash. Disables all other movement options when enabled
+# Enable air dash. Disables all other movement options when enabled
 func enable_air_dash() -> void:
 	air_dash_mask = true
 
+# Change the move speed 
 func change_move_speed(new_move_speed: int) -> void:
 	move_speed = new_move_speed
 
