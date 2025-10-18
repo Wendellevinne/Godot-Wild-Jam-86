@@ -4,7 +4,6 @@ class_name LevelTimer extends Control
 @export var timer: Timer
 @export var timer_label: Label
 
-
 func _ready() -> void:
 	initialize_timer()
 	start_timer()

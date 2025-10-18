@@ -7,18 +7,21 @@ const LEVELS = [
 	"res://Scenes/Levels/second_level.tscn"
 ]
 
-var current_level_index = 0
-var current_level = null
+var current_level: Map = null
 
-func _ready() -> void:
-	change_level()
+func load_first_level() -> void:
+	change_level(0)
 
-func change_level() -> void:
+func change_level(level_number: int) -> void:
+	if level_number > LEVELS.size() - 1:
+		return
+	
 	if current_level:
 		current_level.queue_free()
 		current_level = null
 	
-	var new_level_scene = load(LEVELS[current_level_index])
+	var new_level_scene = load(LEVELS[level_number])
 	var new_level = new_level_scene.instantiate()
 	
-	
+	main_scene.add_child(new_level)
+	current_level = new_level

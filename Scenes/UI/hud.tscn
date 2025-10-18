@@ -1,7 +1,3 @@
-[gd_scene load_steps=2 format=3 uid="uid://yrjmnxoanh4u"]
-
-[ext_resource type="PackedScene" uid="uid://bqfcnjn04hyff" path="res://Scenes/UI/timer.tscn" id="1_sprlj"]
+[gd_scene format=3 uid="uid://yrjmnxoanh4u"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
-
-[node name="Timer" parent="." instance=ExtResource("1_sprlj")]
