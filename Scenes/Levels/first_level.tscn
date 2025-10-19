@@ -32,6 +32,7 @@ script = ExtResource("3_swywn")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource("3_aqoxu")
+volume_db = -1.0
 autoplay = true
 script = ExtResource("4_4l5vx")
 
