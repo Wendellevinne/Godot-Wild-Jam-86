@@ -18,8 +18,6 @@ func _ready() -> void:
 	level_manager.load_first_level()
 
 # Call the completed level scene to the HUD
-func call_completed_level_scene() -> void:
-	hud.get_child(0).queue_free()
 	
 	current_level = get_tree().get_first_node_in_group("Levels")
 	current_level_id = current_level.level_id

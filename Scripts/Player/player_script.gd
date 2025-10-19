@@ -45,6 +45,8 @@ func _physics_process(delta: float) -> void:
 	vertical_movement(delta)
 	horizontal_movement(delta)
 	move_and_slide()
+	
+
 
 # Handle horizontal movement.
 func horizontal_movement(delta: float) -> void:

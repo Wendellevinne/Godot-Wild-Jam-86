@@ -12,3 +12,8 @@ func get_time_limit() -> float:
 
 func restart_level():
 	$Player.global_position = Vector2(-113.0,-37.0)
+	print("final step")
+
+
+func _on_timer_timeout() -> void:
+	restart_level()

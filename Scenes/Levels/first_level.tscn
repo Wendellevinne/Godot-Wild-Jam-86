@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=4 uid="uid://c0ik4lyio4oki"]
+[gd_scene load_steps=9 format=4 uid="uid://c0ik4lyio4oki"]
 
 [ext_resource type="PackedScene" uid="uid://nwdde36flu14" path="res://Scenes/Levels/level_template.tscn" id="1_e00wu"]
 [ext_resource type="PackedScene" uid="uid://polxtka2qjxp" path="res://Scenes/Masks/jump_mask.tscn" id="2_i5tww"]
 [ext_resource type="AudioStream" uid="uid://cgvoqh0q8imyc" path="res://Scenes/Levels/background song for mask.wav" id="3_aqoxu"]
+[ext_resource type="Script" uid="uid://b8hvkrpp408oo" path="res://Scenes/Levels/timer.gd" id="3_jubc2"]
 [ext_resource type="Script" uid="uid://cg0uknxyklegy" path="res://Scenes/Levels/label.gd" id="3_swywn"]
 [ext_resource type="Script" uid="uid://scgvdkvm3276" path="res://Scenes/Levels/audio_stream_player.gd" id="4_4l5vx"]
+[ext_resource type="Script" uid="uid://b6p8bmdk1u0ej" path="res://Scenes/Levels/out_of_bounds.gd" id="6_jr2bq"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_swywn"]
 normal = Vector2(0.028600598, -0.99959093)
@@ -14,36 +16,52 @@ distance = -937.0
 tile_map_data = PackedByteArray("AAD8/wAAAAAAAAAAAAD9/wAAAAAAAAAAAAD+/wAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAD8/wEAAAAAAAAAAAD9/wEAAAAAAAAAAAD+/wEAAAAAAAAAAAD//wEAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAD8/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAD+/wIAAAAAAAAAAAD//wIAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAIAAAAAAAAAAAACAAIAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAEAP7/AAAAAAAAAAAFAP7/AAAAAAAAAAAGAP7/AAAAAAAAAAAHAP7/AAAAAAAAAAAJAPz/AAAAAAAAAAAKAPz/AAAAAAAAAAALAPz/AAAAAAAAAAAMAPz/AAAAAAAAAAACAPr/AAAAAAAAAAADAPr/AAAAAAAAAAAEAPr/AAAAAAAAAAAFAPr/AAAAAAAAAAD8//z/AAAAAAAAAAD8//3/AAAAAAAAAAD8//7/AAAAAAAAAAD8////AAAAAAAAAAAIAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAOAP//AAAAAAAAAAAOAP7/AAAAAAAAAAAOAP3/AAAAAAAAAAAOAPz/AAAAAAAAAAAOAPv/AAAAAAAAAAAOAPr/AAAAAAAAAAAOAPn/AAAAAAAAAAD8//f/AAAAAAAAAAD8//j/AAAAAAAAAAD8//n/AAAAAAAAAAD8//r/AAAAAAAAAAD8//v/AAAAAAAAAAD8/wgAAAAAAAAAAAD9/wgAAAAAAAAAAAD+/wgAAAAAAAAAAAD//wgAAAAAAAAAAAAAAAgAAAAAAAAAAAABAAgAAAAAAAAAAAACAAgAAAAAAAAAAAADAAgAAAAAAAAAAAA=")
 time_limit = 10.0
 
-[node name="Goal" parent="." index="0"]
+[node name="ColorRect" type="ColorRect" parent="." index="0"]
+z_index = -10
+offset_left = -10748.002
+offset_top = 8617.0
+offset_right = -10739.761
+offset_bottom = 8630.603
+scale = Vector2(2294.3232, -1125.4445)
+color = Color(0.57254905, 0.3529412, 0.4392157, 0.8509804)
+
+[node name="Goal" parent="." index="1"]
 position = Vector2(422, 326)
 
-[node name="JumpMask" parent="." index="1" instance=ExtResource("2_i5tww")]
+[node name="JumpMask" parent="." index="2" instance=ExtResource("2_i5tww")]
 position = Vector2(266, -427)
 
-[node name="Player" parent="." index="2"]
+[node name="Player" parent="." index="3" groups=["player_global"]]
 position = Vector2(-113, -37)
 
 [node name="Timer" type="Timer" parent="Player" index="6"]
-wait_time = 10.0
+wait_time = 8.0
 autostart = true
+script = ExtResource("3_jubc2")
 
 [node name="Label" type="Label" parent="Player" index="7"]
-offset_left = 338.0
-offset_top = -639.0
-offset_right = 1134.0
-offset_bottom = -332.0
+offset_left = 940.0
+offset_top = -652.0
+offset_right = 1736.0
+offset_bottom = -345.0
+scale = Vector2(10, 10)
+text = "1"
 script = ExtResource("3_swywn")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource("3_aqoxu")
 volume_db = -1.0
 autoplay = true
 script = ExtResource("4_4l5vx")
 
-[node name="out_of_bounds" type="Area2D" parent="." index="4" groups=["outa_bounds"]]
+[node name="out_of_bounds" type="Area2D" parent="." index="5" groups=["outa_bounds"]]
+script = ExtResource("6_jr2bq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="out_of_bounds" index="0"]
 position = Vector2(30, 29)
 shape = SubResource("WorldBoundaryShape2D_swywn")
 
+[connection signal="timeout" from="Player/Timer" to="." method="_on_timer_timeout"]
 [connection signal="finished" from="AudioStreamPlayer" to="AudioStreamPlayer" method="_on_finished"]
+[connection signal="area_entered" from="out_of_bounds" to="out_of_bounds" method="_on_area_entered"]
+[connection signal="body_entered" from="out_of_bounds" to="out_of_bounds" method="_on_body_entered"]
