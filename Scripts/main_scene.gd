@@ -16,7 +16,6 @@ var current_level_id: int
 # TODO Implement the main menu and make it appear by calling this method
 func _ready() -> void:
 	level_manager.load_first_level()
-	hud.add_child(timer_scene.instantiate())
 
 # Call the completed level scene to the HUD
 func call_completed_level_scene() -> void:
@@ -36,19 +35,7 @@ func call_completed_level_scene() -> void:
 
 # TODO Create the logic to call this function in the game
 # Call the failed level UI to the HUD
-func call_failed_level_scene() -> void:
-	hud.get_node("Timer").queue_free()
-	
-	current_level = get_tree().get_first_node_in_group("Levels")
-	current_level_id = current_level.level_id
-	
-	var failed_scene_instance = failed_scene.instantiate()
-	hud.add_child(failed_scene_instance)
-	
-	_add_exit_button_signal(failed_scene_instance)
-	_add_replay_button_signal(failed_scene_instance)
-	
-	_destroy_level()
+
 
 # Connects the _on_exit_button_pressed signal to this scene
 func _add_exit_button_signal(scene) -> void:

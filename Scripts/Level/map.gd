@@ -9,3 +9,6 @@ class_name Map extends TileMapLayer
 # Return the value of the amount of time the player has to beat the level before losing
 func get_time_limit() -> float:
 	return time_limit
+
+func restart_level():
+	$Player.global_position = Vector2(-113.0,-37.0)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=4 uid="uid://c0ik4lyio4oki"]
+[gd_scene load_steps=6 format=4 uid="uid://c0ik4lyio4oki"]
 
 [ext_resource type="PackedScene" uid="uid://nwdde36flu14" path="res://Scenes/Levels/level_template.tscn" id="1_e00wu"]
 [ext_resource type="PackedScene" uid="uid://polxtka2qjxp" path="res://Scenes/Masks/jump_mask.tscn" id="2_i5tww"]
 [ext_resource type="AudioStream" uid="uid://cgvoqh0q8imyc" path="res://Scenes/Levels/background song for mask.wav" id="3_aqoxu"]
+[ext_resource type="Script" uid="uid://cg0uknxyklegy" path="res://Scenes/Levels/label.gd" id="3_swywn"]
 [ext_resource type="Script" uid="uid://scgvdkvm3276" path="res://Scenes/Levels/audio_stream_player.gd" id="4_4l5vx"]
 
 [node name="FirstLevel" instance=ExtResource("1_e00wu")]
@@ -17,6 +18,17 @@ position = Vector2(266, -427)
 
 [node name="Player" parent="." index="2"]
 position = Vector2(-113, -37)
+
+[node name="Timer" type="Timer" parent="Player" index="6"]
+wait_time = 10.0
+autostart = true
+
+[node name="Label" type="Label" parent="Player" index="7"]
+offset_left = 338.0
+offset_top = -639.0
+offset_right = 1134.0
+offset_bottom = -332.0
+script = ExtResource("3_swywn")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource("3_aqoxu")
