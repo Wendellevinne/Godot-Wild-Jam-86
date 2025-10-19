@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=4 uid="uid://c0ik4lyio4oki"]
+[gd_scene load_steps=5 format=4 uid="uid://c0ik4lyio4oki"]
 
 [ext_resource type="PackedScene" uid="uid://nwdde36flu14" path="res://Scenes/Levels/level_template.tscn" id="1_e00wu"]
 [ext_resource type="PackedScene" uid="uid://polxtka2qjxp" path="res://Scenes/Masks/jump_mask.tscn" id="2_i5tww"]
+[ext_resource type="AudioStream" uid="uid://cgvoqh0q8imyc" path="res://Scenes/Levels/background song for mask.wav" id="3_aqoxu"]
+[ext_resource type="Script" uid="uid://scgvdkvm3276" path="res://Scenes/Levels/audio_stream_player.gd" id="4_4l5vx"]
 
 [node name="FirstLevel" instance=ExtResource("1_e00wu")]
 tile_map_data = PackedByteArray("AAD8/wAAAAAAAAAAAAD9/wAAAAAAAAAAAAD+/wAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAD8/wEAAAAAAAAAAAD9/wEAAAAAAAAAAAD+/wEAAAAAAAAAAAD//wEAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAD8/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAD+/wIAAAAAAAAAAAD//wIAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAIAAAAAAAAAAAACAAIAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAEAP7/AAAAAAAAAAAFAP7/AAAAAAAAAAAGAP7/AAAAAAAAAAAHAP7/AAAAAAAAAAAJAPz/AAAAAAAAAAAKAPz/AAAAAAAAAAALAPz/AAAAAAAAAAAMAPz/AAAAAAAAAAACAPr/AAAAAAAAAAADAPr/AAAAAAAAAAAEAPr/AAAAAAAAAAAFAPr/AAAAAAAAAAD8//z/AAAAAAAAAAD8//3/AAAAAAAAAAD8//7/AAAAAAAAAAD8////AAAAAAAAAAAIAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAOAP//AAAAAAAAAAAOAP7/AAAAAAAAAAAOAP3/AAAAAAAAAAAOAPz/AAAAAAAAAAAOAPv/AAAAAAAAAAAOAPr/AAAAAAAAAAAOAPn/AAAAAAAAAAD8//f/AAAAAAAAAAD8//j/AAAAAAAAAAD8//n/AAAAAAAAAAD8//r/AAAAAAAAAAD8//v/AAAAAAAAAAD8/wgAAAAAAAAAAAD9/wgAAAAAAAAAAAD+/wgAAAAAAAAAAAD//wgAAAAAAAAAAAAAAAgAAAAAAAAAAAABAAgAAAAAAAAAAAACAAgAAAAAAAAAAAADAAgAAAAAAAAAAAA=")
+time_limit = 10.0
 
 [node name="Goal" parent="." index="0"]
 position = Vector2(422, 326)
@@ -14,3 +17,10 @@ position = Vector2(266, -427)
 
 [node name="Player" parent="." index="2"]
 position = Vector2(-113, -37)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]
+stream = ExtResource("3_aqoxu")
+autoplay = true
+script = ExtResource("4_4l5vx")
+
+[connection signal="finished" from="AudioStreamPlayer" to="AudioStreamPlayer" method="_on_finished"]

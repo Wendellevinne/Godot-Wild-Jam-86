@@ -15,6 +15,8 @@ func _ready() -> void:
 # Call the _transfer_timer_value_to_label in a frame by frame basis
 func _process(_delta: float) -> void:
 	_transfer_timer_value_to_label()
+	if timer.timeout:
+		get_tree().quit()
 
 # Initialize the timer, by getting the time limit of a level and passing it to the timer
 func initialize_timer() -> void:
