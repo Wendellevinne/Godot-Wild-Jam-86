@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 collision_manager="*res://Scripts/Globals/collision_manager.gd"
 level_manager="*res://Scripts/Globals/level_manager.gd"
 
+[global_group]
+
+outa_bounds=""
+player_global=""
+
 [input]
 
 move_left={
